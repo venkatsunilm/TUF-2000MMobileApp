@@ -1,17 +1,19 @@
 package com.tuf2000m.energymeter.base
+
 import com.tuf2000m.energymeter.data.remote.NetworkResult
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
 abstract class BaseRepository {
-    suspend fun <T> safeapicall(apiCall: suspend () -> T)  = flow  {
+    suspend fun <T> safeapicall(apiCall: suspend () -> T) = flow {
         try {
             emit(NetworkResult.Loading(true))
             emit(NetworkResult.Success(apiCall.invoke()))
         } catch (e: HttpException) {
             emit(
-                NetworkResult.Failure(e.localizedMessage ?: "Something went wrong please try again later."
+                NetworkResult.Failure(
+                    e.localizedMessage ?: "Something went wrong please try again later."
                 )
             )
 
@@ -23,7 +25,6 @@ abstract class BaseRepository {
             emit(NetworkResult.Failure(e.localizedMessage ?: "Error"))
         }
     }
-
 
 
 }

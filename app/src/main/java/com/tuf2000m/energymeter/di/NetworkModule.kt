@@ -34,7 +34,6 @@ object NetworkModule {
                 this.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             }
         }
-//            .addInterceptor(ServiceInterceptor(dataStoreManager))
             .build()
     }
 
@@ -47,6 +46,7 @@ object NetworkModule {
             .client(okHttpClient)
             .build()
     }
+
     @Provides
     fun provideApiClient(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
