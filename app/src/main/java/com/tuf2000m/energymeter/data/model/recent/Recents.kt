@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.data.remote.model.recent
+package com.tuf2000m.energymeter.data.model.recent
 
 data class Recents(
     val recentList: List<Recent>

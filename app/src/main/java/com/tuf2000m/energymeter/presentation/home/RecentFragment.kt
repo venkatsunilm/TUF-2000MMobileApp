@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.tuf2000m.energymeter.data.model.recent.Recents
 import com.tuf2000m.energymeter.data.remote.NetworkResult
-import com.tuf2000m.energymeter.data.remote.model.recent.Recents
 import com.tuf2000m.energymeter.databinding.FragmentRecentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecentFragment : Fragment() {
+
     private var _binding: FragmentRecentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var recentAdapter: RecentAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,39 +30,60 @@ class RecentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observer()
+
+        // Observe recent data to update UI accordingly
+        observeRecentData()
     }
 
-    private fun observer() {
-        viewModel.recentdata.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkResult.Failure -> {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
-                }
-
-                is NetworkResult.Loading -> {
-                    //loadinghere
-                }
+    /**
+     * Observes recent data and updates the UI accordingly.
+     */
+    private fun observeRecentData() {
+        viewModel.recentData.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                // Handle network failure and loading states if needed...
 
                 is NetworkResult.Success -> {
-                    setRecyclerData(it.data.recentList)
-
+                    // Set recycler data with the recent list from the result
+                    setRecyclerData(result.data.recentList)
                 }
+
+                else -> { /* Handle other cases if needed */ }
             }
         }
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
     override fun onResume() {
         super.onResume()
-        viewModel.getRecents()
+
+        // Request recent data from the ViewModel
+        viewModel.getRecent()
     }
+
+    /**
+     * Sets the recycler data based on the provided recent list.
+     *
+     * @param recentList The list of recent items.
+     */
     private fun setRecyclerData(recentList: List<Recents.Recent>) {
         if (recentList.isNotEmpty()) {
             recentAdapter = RecentAdapter(recentList, object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
+                    // Handle item click if needed
                 }
             })
             binding.rvRecent.adapter = recentAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Clean up the binding instance
+        _binding = null
     }
 }

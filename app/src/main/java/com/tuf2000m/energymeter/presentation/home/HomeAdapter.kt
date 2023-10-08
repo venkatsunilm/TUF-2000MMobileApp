@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tuf2000m.energymeter.data.remote.model.meterdata.Data
+import com.tuf2000m.energymeter.data.model.meterdata.Data
 import com.tuf2000m.energymeter.databinding.ItemEnergycellBinding
 
 class HomeAdapter(
@@ -29,7 +29,6 @@ class HomeAdapter(
         holder.viewHolder.tvVariableunit.text = item.unit
         listener.onItemClick(position)
     }
-
 
     override fun getItemCount(): Int {
         return items.size

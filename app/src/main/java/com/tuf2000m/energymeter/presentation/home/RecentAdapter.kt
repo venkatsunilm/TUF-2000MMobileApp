@@ -3,7 +3,7 @@ package com.tuf2000m.energymeter.presentation.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tuf2000m.energymeter.data.remote.model.recent.Recents
+import com.tuf2000m.energymeter.data.model.recent.Recents
 import com.tuf2000m.energymeter.databinding.ItemRecyclerRecentsBinding
 
 interface OnItemClickListener {

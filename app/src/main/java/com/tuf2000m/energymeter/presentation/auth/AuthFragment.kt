@@ -12,7 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tuf2000m.energymeter.R
 
-import com.tuf2000m.energymeter.data.remote.model.auth.Auth
+import com.tuf2000m.energymeter.data.model.auth.Auth
 import com.tuf2000m.energymeter.databinding.FragmentAuthBinding
 import com.tuf2000m.energymeter.utils.SharedPreferenceManager
 import dagger.hilt.android.AndroidEntryPoint

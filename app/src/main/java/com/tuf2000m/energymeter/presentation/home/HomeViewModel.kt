@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tuf2000m.energymeter.data.model.meterdata.Data
+import com.tuf2000m.energymeter.data.model.meterdata.MeterData
+import com.tuf2000m.energymeter.data.model.meterdata.Timestamp
+import com.tuf2000m.energymeter.data.model.recent.Recents
 import com.tuf2000m.energymeter.data.remote.NetworkResult
-import com.tuf2000m.energymeter.data.remote.model.meterdata.Data
-import com.tuf2000m.energymeter.data.remote.model.meterdata.MeterData
-import com.tuf2000m.energymeter.data.remote.model.meterdata.Timestamp
-import com.tuf2000m.energymeter.data.remote.model.recent.Recents
+import com.tuf2000m.energymeter.data.repository.MeterDataRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,27 +20,27 @@ class HomeViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    private var _meterdata = MutableLiveData<NetworkResult<MeterData>>()
-    val meterdata: LiveData<NetworkResult<MeterData>> = _meterdata
+    private var _meterData = MutableLiveData<NetworkResult<MeterData>>()
+    val meterData: LiveData<NetworkResult<MeterData>> = _meterData
 
-    private var _recentdata = MutableLiveData<NetworkResult<Recents>>()
-    val recentdata: LiveData<NetworkResult<Recents>> = _recentdata
+    private var _recentData = MutableLiveData<NetworkResult<Recents>>()
+    val recentData: LiveData<NetworkResult<Recents>> = _recentData
 
-    private var _searchdata = MutableLiveData<List<Data>>()
-    val searchdata: LiveData<List<Data>> = _searchdata
+    private var _searchData = MutableLiveData<List<Data>>()
+    val searchData: LiveData<List<Data>> = _searchData
 
     fun getTimeStamps() {
         viewModelScope.launch {
             meterDataRepo.getTimeStamps().collect {
-                _meterdata.postValue(it)
+                _meterData.postValue(it)
             }
         }
     }
 
-    fun getRecents() {
+    fun getRecent() {
         viewModelScope.launch {
             meterDataRepo.getRecents().collect {
-                _recentdata.postValue(it)
+                _recentData.postValue(it)
             }
         }
     }
@@ -49,7 +50,7 @@ class HomeViewModel @Inject constructor(
             val dataList = timeDto.data.filter { dataDto ->
                 dataDto.variableName.lowercase().contains(query.toString().lowercase())
             }
-            _searchdata.postValue(dataList)
+            _searchData.postValue(dataList)
         }
 
 

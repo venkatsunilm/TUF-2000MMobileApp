@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Meter Reader</string>
     <string name="positive_energy">"Positive Energy "</string>
@@ -6,7 +7,7 @@
     <string name="signal_quality">Signal Quality</string>
     <string name="login">Login</string>
     <string name="signup">Signup</string>
-    <string name="dha">Don\'t have account Signup here\n</string>
+    <string name="dha">Welcom to Meter Reading App</string>
     <string name="btl">Back to Login</string>
     <string name="textview">TextView</string>
     <string name="refresh_icon">Refresh icon</string>
@@ -14,10 +15,4 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="welcom_to_meter_reading_app">Welcom to Meter Reading App</string>
-
-    <string-array name="filter">
-        <item>Category</item>
-        <item>Name</item>
-
-    </string-array>
 </resources>
