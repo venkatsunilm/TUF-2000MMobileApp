@@ -1,4 +1,4 @@
-## TUF-2000M Mobile App (UNDER CONSTRUCTION)
+## TUF-2000M Mobile App
 
 ## Product Description
 The TUF-2000M Mobile App is designed to provide a user-friendly interface for viewing data from the TUF-2000M ultrasonic energy meter. This app fetches data from the associated REST API and presents it to the user in a readable and intuitive manner.
@@ -30,9 +30,9 @@ Follow these steps to set up the project and run the app locally:
 ## Dependencies
 - [Retrofit](https://square.github.io/retrofit/) for making HTTP requests.
 - [Gson](https://github.com/google/gson) for JSON serialization and deserialization.
-- [RecyclerView](https://developer.android.com/jetpack/androidx/releases/recyclerview) for displaying data.
 - Hilt for dependency injection
-- Jetpack components
+- Jetpack components 
+- Firebase
 - -Etc...
 
 ## Testing
