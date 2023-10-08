@@ -35,7 +35,7 @@ class HomeAdapter(
         return items.size
     }
 
-    fun setcontentData(data: List<Data>) {
+    fun setContentData(data: List<Data>) {
         items = data
         Log.d("TAG", "setcontentDataSize: ${items.size}")
         notifyDataSetChanged()

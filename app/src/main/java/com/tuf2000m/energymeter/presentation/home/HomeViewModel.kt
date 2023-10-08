@@ -52,6 +52,7 @@ class HomeViewModel @Inject constructor(
             _searchdata.postValue(dataList)
         }
 
+
     }
 
 }

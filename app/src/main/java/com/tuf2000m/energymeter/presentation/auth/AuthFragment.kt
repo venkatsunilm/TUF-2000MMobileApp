@@ -30,7 +30,7 @@ class AuthFragment : Fragment() {
     lateinit var sharedPreferences: SharedPreferenceManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,6 +41,8 @@ class AuthFragment : Fragment() {
 
         binding.buttonLogin.setOnClickListener {
             if (binding.editTextEmail.text.isNotEmpty() && binding.editTextPassword.text.isNotEmpty()) {
+                binding.buttonLogin.visibility = View.INVISIBLE
+                binding.pb.visibility = View.VISIBLE
                 if (!isLogin) {
                     createAccount(
                         binding.editTextEmail.text.toString(),
@@ -68,14 +70,22 @@ class AuthFragment : Fragment() {
                     sharedPreferences.saveUSer(Auth(user?.email, user?.displayName))
                     navigateToHome()
                 } else {
+                    showHideViews()
                     Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT)
                         .show()
                 }
             }
     }
 
+    private fun showHideViews() {
+        binding.buttonLogin.visibility = View.VISIBLE
+        binding.pb.visibility = View.GONE
+    }
+
     private fun navigateToHome() {
         findNavController().navigate(R.id.action_authFragment_to_tabsFragment)
+        binding.editTextEmail.text.clear()
+        binding.editTextPassword.text.clear()
     }
 
     private fun signIn(email: String, password: String) {
@@ -87,6 +97,7 @@ class AuthFragment : Fragment() {
                     sharedPreferences.saveUSer(Auth(user?.email, user?.displayName))
                     navigateToHome()
                 } else {
+                    showHideViews()
                     Toast.makeText(
                         requireContext(),
                         "Authentication failed.",

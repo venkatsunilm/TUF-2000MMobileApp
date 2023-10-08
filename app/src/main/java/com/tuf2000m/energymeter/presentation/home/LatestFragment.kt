@@ -11,7 +11,9 @@ import androidx.fragment.app.activityViewModels
 import com.tuf2000m.energymeter.data.remote.NetworkResult
 import com.tuf2000m.energymeter.data.remote.model.meterdata.Timestamp
 import com.tuf2000m.energymeter.databinding.FragmentLatestBinding
+import com.tuf2000m.energymeter.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class LatestFragment : Fragment() {
@@ -40,8 +42,9 @@ class LatestFragment : Fragment() {
         binding.imageView.setOnClickListener {
             if (currentIndex < timestamps.size - 1) {
                 currentIndex += 1
-                binding.tvTimespam.text = timestamps[currentIndex].timestamp
-                homeAdapter.setcontentData(timestamps[currentIndex].data)
+                binding.tvTimespam.text =
+                    Constant.TimeFormatter.convertUTCFormat(timestamps[currentIndex].timestamp)
+                homeAdapter.setContentData(timestamps[currentIndex].data)
 
             } else {
                 Toast.makeText(context, "No More Records", Toast.LENGTH_SHORT).show()
@@ -50,7 +53,7 @@ class LatestFragment : Fragment() {
         binding.appCompatEditText.doOnTextChanged { text, _, _, _ ->
             if (text?.length == 0) {
                 currentIndex = 0
-                homeAdapter.setcontentData(timestamps[currentIndex].data)
+                homeAdapter.setContentData(timestamps[currentIndex].data)
             } else {
                 viewModel.searchData(timestamps, text)
             }
@@ -80,15 +83,21 @@ class LatestFragment : Fragment() {
         }
         viewModel.searchdata.observe(viewLifecycleOwner) {
             it?.let {
-                homeAdapter.setcontentData(it)
+                homeAdapter.setContentData(it)
             }
         }
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getTimeStamps()
+    }
+
     private fun setRecyclerData() {
         if (timestamps.isNotEmpty()) {
-            binding.tvTimespam.text = timestamps[currentIndex].timestamp
+            binding.tvTimespam.text =
+                Constant.TimeFormatter.convertUTCFormat(timestamps[currentIndex].timestamp)
             homeAdapter = HomeAdapter(timestamps[currentIndex].data, object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
 
@@ -97,6 +106,5 @@ class LatestFragment : Fragment() {
             binding.rvLatest.adapter = homeAdapter
         }
     }
-
 
 }
