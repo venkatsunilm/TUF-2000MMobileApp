@@ -28,7 +28,7 @@ class RecentAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         listener.onItemClick(position)
-        holder.viewHolder.tvRecent.text=items[position].timestamp
+        holder.viewHolder.tvRecent.text = items[position].timestamp
 
 
     }
