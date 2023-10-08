@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home.recenthistory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

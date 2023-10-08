@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.auth
+package com.tuf2000m.energymeter.views.authentication
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home.latest
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tuf2000m.energymeter.data.model.meterdata.Data
 import com.tuf2000m.energymeter.databinding.ItemEnergycellBinding
+import com.tuf2000m.energymeter.views.home.recenthistory.OnItemClickListener
 
 
 /**
@@ -15,10 +16,10 @@ import com.tuf2000m.energymeter.databinding.ItemEnergycellBinding
  * @param items List of energy data to be displayed.
  * @param listener Item click listener.
  */
-class HomeAdapter(
+class LatestReadingAdapter(
     private var items: List<Data>,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<LatestReadingAdapter.ViewHolder>() {
 
     /**
      * ViewHolder for the energy data item view.

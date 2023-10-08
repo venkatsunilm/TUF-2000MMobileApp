@@ -14,6 +14,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="welcom_to_meter_reading_app">Welcom to Meter Reading App</string>
+    <string name="latestReading">Latest Reading</string>
+    <string name="recentHistory">Recent History</string>
 
     <string-array name="filter">
         <item>Category</item>

@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.auth
+package com.tuf2000m.energymeter.views.authentication
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -83,7 +83,7 @@ class AuthFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        findNavController().navigate(R.id.action_authFragment_to_tabsFragment)
+        findNavController().navigate(R.id.action_authFragment_to_homeFragment)
         binding.editTextEmail.text.clear()
         binding.editTextPassword.text.clear()
     }

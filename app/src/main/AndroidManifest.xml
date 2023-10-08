@@ -19,7 +19,7 @@
 
         <!-- Main activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".EnergyMeterActivity"
             android:exported="true">
 
             <!-- Intent filter for main action -->

@@ -1,9 +1,11 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.tuf2000m.energymeter.views.home.latest.LatestReadingFragment
+import com.tuf2000m.energymeter.views.home.recenthistory.RecentHistoryFragment
 
 
 /**
@@ -35,8 +37,8 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
      */
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> LatestFragment()
-            else -> RecentFragment()
+            0 -> LatestReadingFragment()
+            else -> RecentHistoryFragment()
         }
     }
 }

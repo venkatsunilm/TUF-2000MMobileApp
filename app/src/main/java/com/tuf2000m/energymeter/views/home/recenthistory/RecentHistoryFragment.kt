@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home.recenthistory
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +9,15 @@ import androidx.fragment.app.activityViewModels
 import com.tuf2000m.energymeter.data.model.recent.RecentData
 import com.tuf2000m.energymeter.data.remote.NetworkResult
 import com.tuf2000m.energymeter.databinding.FragmentRecentBinding
+import com.tuf2000m.energymeter.views.home.latest.LatestReadingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecentFragment : Fragment() {
+class RecentHistoryFragment : Fragment() {
 
     private var _binding: FragmentRecentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: LatestReadingViewModel by activityViewModels()
     private lateinit var recentAdapter: RecentAdapter
 
     override fun onCreateView(

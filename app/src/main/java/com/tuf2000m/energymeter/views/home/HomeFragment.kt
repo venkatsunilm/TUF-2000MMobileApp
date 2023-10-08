@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,22 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
+import com.tuf2000m.energymeter.R
 import com.tuf2000m.energymeter.databinding.FragmentTabsBinding
 import com.tuf2000m.energymeter.utils.SharedPreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TabsFragment : Fragment() {
+class HomeFragment : Fragment() {
     private var _binding: FragmentTabsBinding? = null
     private val binding get() = _binding!!
 
     @Inject
     lateinit var sharedPreferences: SharedPreferenceManager
-    private val animalsArray = arrayOf(
-        "Latest",
-        "Recent"
-    )
+    private lateinit var animalsArray : Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +33,12 @@ class TabsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        animalsArray = arrayOf(
+            getString(R.string.latestReading),
+            getString(R.string.recentHistory)
+        )
+
         setTabs()
         setupLogoutButton()
     }
@@ -46,6 +50,7 @@ class TabsFragment : Fragment() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
         val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+
         viewPager.adapter = adapter
         // Attach the TabLayout with the ViewPager
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home.latest
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class LatestReadingViewModel @Inject constructor(
     private val meterDataRepo: MeterDataRepo,
 ) : ViewModel() {
 

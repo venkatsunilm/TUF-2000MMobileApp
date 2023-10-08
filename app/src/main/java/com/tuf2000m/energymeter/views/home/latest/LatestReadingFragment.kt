@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.presentation.home
+package com.tuf2000m.energymeter.views.home.latest
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,16 +12,17 @@ import com.tuf2000m.energymeter.data.remote.NetworkResult
 import com.tuf2000m.energymeter.data.model.meterdata.TimeStamp
 import com.tuf2000m.energymeter.databinding.FragmentLatestBinding
 import com.tuf2000m.energymeter.utils.Constant
+import com.tuf2000m.energymeter.views.home.recenthistory.OnItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LatestFragment : Fragment() {
+class LatestReadingFragment : Fragment() {
     private var _binding: FragmentLatestBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: LatestReadingViewModel by activityViewModels()
     private var currentIndex = 0
     private var timeStamps = mutableListOf<TimeStamp>()
-    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var latestReadingAdapter: LatestReadingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +65,7 @@ class LatestFragment : Fragment() {
             currentIndex += 1
             binding.tvTimespam.text =
                 Constant.TimeFormatter.convertUTCFormat(timeStamps[currentIndex].timeStamp)
-            homeAdapter.setContentData(timeStamps[currentIndex].data)
+            latestReadingAdapter.setContentData(timeStamps[currentIndex].data)
 
         } else {
             Toast.makeText(context, "No More Records", Toast.LENGTH_SHORT).show()
@@ -82,7 +83,7 @@ class LatestFragment : Fragment() {
     private fun handleSearchTextChange(text: CharSequence?) {
         if (text.isNullOrBlank()) {
             currentIndex = 0
-            homeAdapter.setContentData(timeStamps[currentIndex].data)
+            latestReadingAdapter.setContentData(timeStamps[currentIndex].data)
         } else {
             viewModel.searchData(timeStamps, text.toString())
         }
@@ -113,7 +114,7 @@ class LatestFragment : Fragment() {
 
         viewModel.searchData.observe(viewLifecycleOwner) {
             it?.let {
-                homeAdapter.setContentData(it)
+                latestReadingAdapter.setContentData(it)
             }
         }
     }
@@ -122,12 +123,12 @@ class LatestFragment : Fragment() {
         if (timeStamps.isNotEmpty()) {
             binding.tvTimespam.text =
                 Constant.TimeFormatter.convertUTCFormat(timeStamps[currentIndex].timeStamp)
-            homeAdapter = HomeAdapter(timeStamps[currentIndex].data, object : OnItemClickListener {
+            latestReadingAdapter = LatestReadingAdapter(timeStamps[currentIndex].data, object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     // Handle item click
                 }
             })
-            binding.rvLatest.adapter = homeAdapter
+            binding.rvLatest.adapter = latestReadingAdapter
         }
     }
 
