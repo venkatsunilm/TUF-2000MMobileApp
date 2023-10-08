@@ -1,5 +1,6 @@
 package com.tuf2000m.energymeter.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.tuf2000m.energymeter.BuildConfig
 import com.tuf2000m.energymeter.data.remote.ApiService
 import com.tuf2000m.energymeter.utils.Constant
@@ -52,5 +53,10 @@ object NetworkModule {
         return retrofit.create(ApiService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
 
 }

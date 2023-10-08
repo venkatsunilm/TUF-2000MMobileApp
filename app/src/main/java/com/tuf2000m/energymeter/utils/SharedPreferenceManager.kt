@@ -3,7 +3,7 @@ package com.tuf2000m.energymeter.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.tuf2000m.energymeter.data.remote.model.auth.Auth
+import com.tuf2000m.energymeter.data.model.auth.Auth
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext val contex
         return Gson().fromJson(data, Auth::class.java)
     }
     fun clearData(){
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply();
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
     }
 
 }

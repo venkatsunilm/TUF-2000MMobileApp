@@ -1,4 +1,4 @@
-package com.tuf2000m.energymeter.data.remote.model.meterdata
+package com.tuf2000m.energymeter.data.model.meterdata
 
 data class Data(
     val category: String,
