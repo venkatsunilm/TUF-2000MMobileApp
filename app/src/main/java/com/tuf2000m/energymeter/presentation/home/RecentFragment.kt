@@ -50,6 +50,10 @@ class RecentFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getRecents()
+    }
     private fun setRecyclerData(recentList: List<Recents.Recent>) {
         if (recentList.isNotEmpty()) {
             recentAdapter = RecentAdapter(recentList, object : OnItemClickListener {

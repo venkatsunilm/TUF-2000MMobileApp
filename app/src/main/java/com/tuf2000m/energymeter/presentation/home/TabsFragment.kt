@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tuf2000m.energymeter.databinding.FragmentTabsBinding
@@ -16,8 +17,8 @@ import javax.inject.Inject
 class TabsFragment : Fragment() {
     private var _binding: FragmentTabsBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by activityViewModels()
 
-    //    private val viewModel: HomeViewModel by activityViewModels()
     @Inject
     lateinit var sharedPreferences: SharedPreferenceManager
     private val animalsArray = arrayOf(
@@ -43,14 +44,11 @@ class TabsFragment : Fragment() {
         }
     }
 
-
     private fun setTabs() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
-
         val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
-
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = animalsArray[position]
         }.attach()
