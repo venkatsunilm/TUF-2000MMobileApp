@@ -9,7 +9,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.tuf2000m.energymeter.data.remote.NetworkResult
-import com.tuf2000m.energymeter.data.model.meterdata.Timestamp
+import com.tuf2000m.energymeter.data.model.meterdata.TimeStamp
 import com.tuf2000m.energymeter.databinding.FragmentLatestBinding
 import com.tuf2000m.energymeter.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ class LatestFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by activityViewModels()
     private var currentIndex = 0
-    private var timestamps = mutableListOf<Timestamp>()
+    private var timeStamps = mutableListOf<TimeStamp>()
     private lateinit var homeAdapter: HomeAdapter
 
     override fun onCreateView(
@@ -60,11 +60,11 @@ class LatestFragment : Fragment() {
      * Handles the logic when the user clicks the "Next" button to display the next set of data.
      */
     private fun handleNextButtonClick() {
-        if (currentIndex < timestamps.size - 1) {
+        if (currentIndex < timeStamps.size - 1) {
             currentIndex += 1
             binding.tvTimespam.text =
-                Constant.TimeFormatter.convertUTCFormat(timestamps[currentIndex].timestamp)
-            homeAdapter.setContentData(timestamps[currentIndex].data)
+                Constant.TimeFormatter.convertUTCFormat(timeStamps[currentIndex].timeStamp)
+            homeAdapter.setContentData(timeStamps[currentIndex].data)
 
         } else {
             Toast.makeText(context, "No More Records", Toast.LENGTH_SHORT).show()
@@ -82,9 +82,9 @@ class LatestFragment : Fragment() {
     private fun handleSearchTextChange(text: CharSequence?) {
         if (text.isNullOrBlank()) {
             currentIndex = 0
-            homeAdapter.setContentData(timestamps[currentIndex].data)
+            homeAdapter.setContentData(timeStamps[currentIndex].data)
         } else {
-            viewModel.searchData(timestamps, text.toString())
+            viewModel.searchData(timeStamps, text.toString())
         }
     }
 
@@ -104,7 +104,7 @@ class LatestFragment : Fragment() {
 
                 is NetworkResult.Success -> {
                     result.data.let {
-                        timestamps.addAll(it.timestamp)
+                        timeStamps.addAll(it.timeStamp)
                         setRecyclerData()
                     }
                 }
@@ -119,10 +119,10 @@ class LatestFragment : Fragment() {
     }
 
     private fun setRecyclerData() {
-        if (timestamps.isNotEmpty()) {
+        if (timeStamps.isNotEmpty()) {
             binding.tvTimespam.text =
-                Constant.TimeFormatter.convertUTCFormat(timestamps[currentIndex].timestamp)
-            homeAdapter = HomeAdapter(timestamps[currentIndex].data, object : OnItemClickListener {
+                Constant.TimeFormatter.convertUTCFormat(timeStamps[currentIndex].timeStamp)
+            homeAdapter = HomeAdapter(timeStamps[currentIndex].data, object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     // Handle item click
                 }

@@ -3,7 +3,7 @@ package com.tuf2000m.energymeter.presentation.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tuf2000m.energymeter.data.model.recent.Recents
+import com.tuf2000m.energymeter.data.model.recent.RecentData
 import com.tuf2000m.energymeter.databinding.ItemRecyclerRecentsBinding
 
 interface OnItemClickListener {
@@ -13,7 +13,7 @@ interface OnItemClickListener {
 }
 
 class RecentAdapter(
-    private val items: List<Recents.Recent>,
+    private val items: List<RecentData.RecentList>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<RecentAdapter.ViewHolder>() {
 
@@ -28,7 +28,7 @@ class RecentAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         listener.onItemClick(position)
-        holder.viewHolder.tvRecent.text = items[position].timestamp
+        holder.viewHolder.tvRecent.text = items[position].timeStamp
 
 
     }

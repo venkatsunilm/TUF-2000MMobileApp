@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.tuf2000m.energymeter.data.model.recent.Recents
+import com.tuf2000m.energymeter.data.model.recent.RecentData
 import com.tuf2000m.energymeter.data.remote.NetworkResult
 import com.tuf2000m.energymeter.databinding.FragmentRecentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,13 +47,10 @@ class RecentFragment : Fragment() {
                     setRecyclerData(result.data.recentList)
                 }
 
-                else -> { /* Handle other cases if needed */ }
+                else -> { /* Handle other cases if needed */
+                }
             }
         }
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
@@ -67,11 +63,11 @@ class RecentFragment : Fragment() {
     /**
      * Sets the recycler data based on the provided recent list.
      *
-     * @param recentList The list of recent items.
+     * @param recentDataList The list of recent items.
      */
-    private fun setRecyclerData(recentList: List<Recents.Recent>) {
-        if (recentList.isNotEmpty()) {
-            recentAdapter = RecentAdapter(recentList, object : OnItemClickListener {
+    private fun setRecyclerData(recentDataList: List<RecentData.RecentList>) {
+        if (recentDataList.isNotEmpty()) {
+            recentAdapter = RecentAdapter(recentDataList, object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     // Handle item click if needed
                 }

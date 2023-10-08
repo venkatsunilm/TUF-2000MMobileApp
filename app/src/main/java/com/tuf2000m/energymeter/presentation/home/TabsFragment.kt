@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tuf2000m.energymeter.databinding.FragmentTabsBinding
@@ -17,13 +16,12 @@ import javax.inject.Inject
 class TabsFragment : Fragment() {
     private var _binding: FragmentTabsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HomeViewModel by activityViewModels()
 
     @Inject
     lateinit var sharedPreferences: SharedPreferenceManager
     private val animalsArray = arrayOf(
         "Latest",
-        "Recent",
+        "Recent"
     )
 
     override fun onCreateView(
@@ -38,21 +36,37 @@ class TabsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTabs()
-        binding.imageLogout.setOnClickListener {
-            sharedPreferences.clearData()
-            findNavController().popBackStack()
-        }
+        setupLogoutButton()
     }
 
+    /**
+     * Sets up the tabs in the UI using a ViewPager and TabLayout.
+     */
     private fun setTabs() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
         val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
+        // Attach the TabLayout with the ViewPager
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = animalsArray[position]
         }.attach()
     }
 
+    /**
+     * Sets up the logout button to handle logout logic.
+     */
+    private fun setupLogoutButton() {
+        // Handle logout button click
+        binding.imageLogout.setOnClickListener {
+            // Clear data and navigate back to previous screen
+            sharedPreferences.clearData()
+            findNavController().popBackStack()
+        }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
