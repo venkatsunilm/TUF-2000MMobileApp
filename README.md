@@ -38,6 +38,10 @@ Follow these steps to set up the project and run the app locally:
 ## Testing
 Unit and UI tests are yet to be implemented to ensure the app's functionality and user interface work as expected.
 
+## Additional info:
+1. Some supporting information in this Google Drive link - https://drive.google.com/drive/folders/1b5gtmzvwHqkAr0e5juCrw9oakHomrRjF
+2. https://my-json-server.typicode.com/MinchalaVenkatSunil/demo - "my-json-server.typicode.com", used the restricted sample with limitations to fetch JSON response.
+   
 ## Additional Thoughts:
 	1. **Localization** support based on language ID stored in the registry. Initiated but still needs to be completed fully.
 	2. **Offline** support to access previously fetched data and other few timestamps. 
