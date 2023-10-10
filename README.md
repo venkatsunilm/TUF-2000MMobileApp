@@ -1,15 +1,14 @@
 ## TUF-2000M Mobile App
 
 ## Product Description
-The TUF-2000M Mobile App is designed to provide a user-friendly interface for viewing data from the TUF-2000M ultrasonic energy meter. This app fetches data from the associated REST API and presents it to the user in a readable and intuitive manner.
+The TUF-2000M Mobile App is designed to provide a user-friendly interface for viewing data from the TUF-2000M ultrasonic energy meter. This app fetches data from the associated REST API and presents it to the user in a readable and intuitive manner. 
+
+## The goal of the app is to demonstrate one user friendly UI with simple features and to make use of all latest Jetpack components and best practices. As of now using a JSON mock server but assuming we will get a JSON response from the real time backend service to show the latest and recents data in the UI. 
 
 ## Features
 - Display parsed data from the TUF-2000M ultrasonic energy meter.
 - User-friendly interface for easy data visualization.
 - Secure authentication for user access.
-
-## User Manual
-Information on the registries, variable names, units, notes, and formats are available on pages 39-42. docs/tuf-2000m.pdf
 
 ## Getting Started
 Follow these steps to set up the project and run the app locally:
